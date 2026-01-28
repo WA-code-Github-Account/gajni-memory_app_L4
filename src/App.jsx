@@ -212,7 +212,7 @@ function App() {
     </div>
   );
 
-  const Dashboard = ({ signOut }) => {
+  const Dashboard = ({ signOut, userName }) => {
     if (memoriesLoading) {
       return (
         <div className="loading-state">
@@ -330,34 +330,63 @@ function App() {
           )}
         </ul>
 
-        <footer className="app-footer">
+        <footer className="app-footer" style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: '10px',
+          marginTop: '30px',
+          padding: '20px',
+          borderTop: '2px solid rgba(106, 130, 251, 0.3)'
+        }}>
           <button onClick={signOut} className="logout-btn">Logout</button>
-          <p>Created by : WA.SIDDIQUI ®</p>
+          <p style={{ 
+            margin: 0, 
+            color: '#00f7ff',
+            fontSize: '16px',
+            fontWeight: 'bold'
+          }}>
+            Created by: WA.SIDDIQUI ®
+          </p>
         </footer>
       </>
     );
   };
 
   if (user) {
+    const userName = (user.user_metadata?.name ||
+      user.user_metadata?.full_name ||
+      user.email?.split('@')[0] ||
+      'User').split(' ')[0];
+
     return (
       <div className="app-container">
         <header className="app-header">
-          <div className="header-content">
-            <h1 className="app-title">Gajni Memory</h1>
-            <div className="welcome-section">
-              <div className="welcome-text">Welcome, 👋</div>
-              <div className="user-name">
-                {
-                  (user.user_metadata?.name ||
-                  user.user_metadata?.full_name ||
-                  user.email?.split('@')[0] ||
-                  'User').split(' ')[0]
-                }
-              </div>
+          <div className="header-content" style={{ textAlign: 'center' }}>
+            <h1 className="app-title" style={{
+              fontSize: '2.8rem',
+              background: 'linear-gradient(135deg, #00f7ff 0%, #ff00c8 50%, #6a82fb 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              fontWeight: 'bold',
+              letterSpacing: '3px',
+              margin: '20px 0 10px 0',
+              textShadow: '0 0 30px rgba(0, 247, 255, 0.3)',
+              animation: 'glow 2s ease-in-out infinite alternate'
+            }}>
+              Gajni 🧠 Memory
+            </h1>
+            <div style={{
+              fontSize: '1.2rem',
+              color: '#e0e0ff',
+              marginTop: '10px',
+              marginBottom: '20px'
+            }}>
+              Welcome, {userName}! 👋
             </div>
           </div>
         </header>
-        <Dashboard signOut={signOut} />
+        <Dashboard signOut={signOut} userName={userName} />
       </div>
     );
   }

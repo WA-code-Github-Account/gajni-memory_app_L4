@@ -30,7 +30,14 @@ const Login = () => {
   };
 
   return (
-    <div className="auth-container">
+    <div className="auth-container" style={{
+      minHeight: '100vh',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      position: 'relative'
+    }}>
       <div className="auth-form">
         <h2>{isSignUp ? 'Create Account' : 'Login'}</h2>
         
@@ -98,8 +105,17 @@ const Login = () => {
           </p>
         </div>
       </div>
-      <footer className="login-footer">
-        <p>Created by : WA.SIDDIQUI ®</p>
+      
+      <footer className="login-footer" style={{
+        position: 'absolute',
+        bottom: '20px',
+        width: '100%',
+        textAlign: 'center',
+        color: '#00f7ff',
+        fontSize: '14px',
+        fontWeight: 'bold'
+      }}>
+        <p style={{ margin: 0 }}>Created by: WA.SIDDIQUI ®</p>
       </footer>
     </div>
   );
